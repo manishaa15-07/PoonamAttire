@@ -1,0 +1,252 @@
+[
+    {
+        "name": "Floral Print Saree",
+        "description": "Beautiful floral print saree with intricate embroidery work. Perfect for special occasions and festivals.",
+        "price": 2999,
+        "images": [
+            "https://images.unsplash.com/photo-1583394838336-acd977736f90?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+        ],
+        "category": "Sarees",
+        "sizes": [
+            "Free Size"
+        ],
+        "stock": {
+            "Free Size": 10
+        },
+        "details": [
+            "Material: Silk",
+            "Length: 5.5 meters",
+            "Blouse Piece Included",
+            "Hand Wash Only"
+        ]
+    },
+    {
+        "name": "Designer Lehenga Choli",
+        "description": "Exquisite designer lehenga with heavy embroidery and mirror work. Perfect for weddings and grand celebrations.",
+        "price": 15999,
+        "images": [
+            "https://images.unsplash.com/photo-1583394838336-acd977736f90?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+        ],
+        "category": "Lehengas",
+        "sizes": [
+            "S",
+            "M",
+            "L",
+            "XL"
+        ],
+        "stock": {
+            "S": 5,
+            "M": 8,
+            "L": 6,
+            "XL": 4
+        },
+        "details": [
+            "Material: Silk and Net",
+            "Heavy Embroidery Work",
+            "Matching Dupatta Included",
+            "Dry Clean Only"
+        ]
+    },
+    {
+        "name": "Party Wear Gown",
+        "description": "Elegant party wear gown with modern design and comfortable fit. Perfect for evening parties and special events.",
+        "price": 4999,
+        "images": [
+            "https://images.unsplash.com/photo-1583394838336-acd977736f90?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+        ],
+        "category": "Gowns",
+        "sizes": [
+            "S",
+            "M",
+            "L"
+        ],
+        "stock": {
+            "S": 7,
+            "M": 10,
+            "L": 5
+        },
+        "details": [
+            "Material: Georgette",
+            "Semi-Stitched",
+            "Machine Washable",
+            "Modern Design"
+        ]
+    },
+    {
+        "name": "Designer Suit Set",
+        "description": "Stylish suit set with contemporary design and comfortable fabric. Perfect for daily wear and office occasions.",
+        "price": 3499,
+        "images": [
+            "https://images.unsplash.com/photo-1583394838336-acd977736f90?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+        ],
+        "category": "Suits",
+        "sizes": [
+            "S",
+            "M",
+            "L",
+            "XL"
+        ],
+        "stock": {
+            "S": 8,
+            "M": 12,
+            "L": 10,
+            "XL": 6
+        },
+        "details": [
+            "Material: Cotton",
+            "Fully Stitched",
+            "Machine Washable",
+            "Includes Dupatta"
+        ]
+    },
+    {
+        "name": "Embroidered Kurti",
+        "description": "Beautiful embroidered kurti with modern design and comfortable fit. Perfect for casual and semi-formal occasions.",
+        "price": 1999,
+        "images": [
+            "https://images.unsplash.com/photo-1583394838336-acd977736f90?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+        ],
+        "category": "Kurtis",
+        "sizes": [
+            "S",
+            "M",
+            "L"
+        ],
+        "stock": {
+            "S": 15,
+            "M": 20,
+            "L": 15
+        },
+        "details": [
+            "Material: Cotton",
+            "Hand Embroidered",
+            "Machine Washable",
+            "Regular Fit"
+        ]
+    },
+    {
+        "name": "Bridal Lehenga",
+        "description": "Stunning bridal lehenga with heavy embroidery and traditional design. Perfect for wedding ceremonies.",
+        "price": 29999,
+        "images": [
+            "https://images.unsplash.com/photo-1583394838336-acd977736f90?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+        ],
+        "category": "Lehengas",
+        "sizes": [
+            "S",
+            "M",
+            "L",
+            "XL"
+        ],
+        "stock": {
+            "S": 3,
+            "M": 4,
+            "L": 3,
+            "XL": 2
+        },
+        "details": [
+            "Material: Silk and Velvet",
+            "Heavy Zari Work",
+            "Matching Dupatta and Blouse",
+            "Dry Clean Only"
+        ]
+    },
+    {
+        "name": "Designer Saree",
+        "description": "Elegant designer saree with modern prints and comfortable fabric. Perfect for parties and special occasions.",
+        "price": 3999,
+        "images": [
+            "https://images.unsplash.com/photo-1583394838336-acd977736f90?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+        ],
+        "category": "Sarees",
+        "sizes": [
+            "Free Size"
+        ],
+        "stock": {
+            "Free Size": 12
+        },
+        "details": [
+            "Material: Georgette",
+            "Length: 5.5 meters",
+            "Blouse Piece Included",
+            "Hand Wash Only"
+        ]
+    },
+    {
+        "name": "Party Wear Suit",
+        "description": "Stylish party wear suit with contemporary design and comfortable fit. Perfect for evening parties.",
+        "price": 4499,
+        "images": [
+            "https://images.unsplash.com/photo-1583394838336-acd977736f90?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+        ],
+        "category": "Suits",
+        "sizes": [
+            "S",
+            "M",
+            "L"
+        ],
+        "stock": {
+            "S": 6,
+            "M": 8,
+            "L": 6
+        },
+        "details": [
+            "Material: Silk",
+            "Fully Stitched",
+            "Dry Clean Only",
+            "Includes Dupatta"
+        ]
+    },
+    {
+        "name": "Designer Gown",
+        "description": "Exquisite designer gown with modern design and comfortable fit. Perfect for special occasions.",
+        "price": 6999,
+        "images": [
+            "https://images.unsplash.com/photo-1583394838336-acd977736f90?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+        ],
+        "category": "Gowns",
+        "sizes": [
+            "S",
+            "M",
+            "L",
+            "XL"
+        ],
+        "stock": {
+            "S": 5,
+            "M": 7,
+            "L": 5,
+            "XL": 3
+        },
+        "details": [
+            "Material: Net and Silk",
+            "Semi-Stitched",
+            "Dry Clean Only",
+            "Modern Design"
+        ]
+    },
+    {
+        "name": "Printed Kurti",
+        "description": "Stylish printed kurti with modern design and comfortable fit. Perfect for daily wear.",
+        "price": 1499,
+        "images": [
+            "https://images.unsplash.com/photo-1583394838336-acd977736f90?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+        ],
+        "category": "Kurtis",
+        "sizes": [
+            "S",
+            "M",
+            "L"
+        ],
+        "stock": {
+            "S": 20,
+            "M": 25,
+            "L": 20
+        },
+        "details": [
+            "Material: Cotton",
+            "Machine Washable",
+            "Regular Fit",
+            "Modern Print"
+        ]
+    }
+]
