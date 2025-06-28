@@ -28,9 +28,19 @@ export const CartProvider = ({ children }) => {
             try {
                 setLoading(true);
                 const response = await cartAPI.get();
+                console.log('Cart API response:', response.data);
+
                 if (response.data && Array.isArray(response.data.items)) {
+                    console.log('Cart items structure:', response.data.items.map(item => ({
+                        _id: item._id,
+                        product: item.product,
+                        productId: item.product?._id || item.product,
+                        size: item.size,
+                        quantity: item.quantity
+                    })));
                     setCart(response.data);
                 } else {
+                    console.log('No items array in cart response, setting empty cart');
                     setCart({ items: [] });
                 }
                 setError(null);
@@ -59,18 +69,18 @@ export const CartProvider = ({ children }) => {
         }
     };
 
-    const updateQuantity = async (cartItemId, quantity) => {
+    const updateQuantity = async (id, quantity) => {
         try {
-            const response = await cartAPI.updateQuantity(cartItemId, { quantity });
+            const response = await cartAPI.updateQuantity(id, { quantity });
             setCart(response.data);
         } catch (err) {
             console.error('Error updating quantity:', err);
         }
     };
 
-    const removeFromCart = async (cartItemId) => {
+    const removeFromCart = async (id) => {
         try {
-            const response = await cartAPI.remove(cartItemId);
+            const response = await cartAPI.remove(id);
             console.log('Remove from cart response:', response.data);
             setCart(response.data);
         } catch (err) {
@@ -93,10 +103,8 @@ export const CartProvider = ({ children }) => {
     const getCartTotal = () => {
         if (!cart || !cart.items || !Array.isArray(cart.items)) return 0;
         return cart.items.reduce((total, item) => {
-            if (item.product && typeof item.product.price === 'number') {
-                return total + (item.product.price * item.quantity);
-            }
-            return total;
+            const price = item.product?.price || 0;
+            return total + (price * item.quantity);
         }, 0);
     };
 

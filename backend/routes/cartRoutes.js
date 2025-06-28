@@ -7,13 +7,29 @@ const { auth } = require('../middleware/auth');
 // Get user's cart
 router.get('/', auth, async (req, res) => {
     try {
+        console.log('=== FETCHING CART ===');
+        console.log('User ID:', req.user._id);
+
         let cart = await Cart.findOne({ user: req.user._id }).populate('items.product');
+
         if (!cart) {
+            console.log('No cart found, creating new cart');
             cart = new Cart({ user: req.user._id, items: [] });
             await cart.save();
         }
+
+        console.log('Cart items after populate:', cart.items.map(item => ({
+            _id: item._id,
+            product: item.product,
+            productType: typeof item.product,
+            productId: item.product?._id,
+            size: item.size,
+            quantity: item.quantity
+        })));
+
         res.json(cart);
     } catch (error) {
+        console.error('Error fetching cart:', error);
         res.status(500).json({ error: 'Error fetching cart' });
     }
 });
@@ -22,24 +38,49 @@ router.get('/', auth, async (req, res) => {
 router.post('/', auth, async (req, res) => {
     const { productId, quantity, size, cartItemId } = req.body;
     try {
+        console.log('=== ADDING TO CART ===');
+        console.log('Request body:', { productId, quantity, size, cartItemId });
+
         const product = await Product.findById(productId);
-        if (!product) return res.status(404).json({ error: 'Product not found' });
+        if (!product) {
+            console.log('Product not found:', productId);
+            return res.status(404).json({ error: 'Product not found' });
+        }
+
+        console.log('Product found:', { _id: product._id, name: product.name });
 
         let cart = await Cart.findOne({ user: req.user._id });
-        if (!cart) cart = new Cart({ user: req.user._id, items: [] });
+        if (!cart) {
+            console.log('Creating new cart for user:', req.user._id);
+            cart = new Cart({ user: req.user._id, items: [] });
+        }
 
         const existingItem = cart.items.id(cartItemId);
 
         if (existingItem) {
+            console.log('Updating existing item quantity');
             existingItem.quantity += quantity;
         } else {
+            console.log('Adding new item to cart');
             cart.items.push({ _id: cartItemId, product: productId, quantity, size });
         }
 
         await cart.save();
+        console.log('Cart saved, populating items...');
         await cart.populate('items.product');
+
+        console.log('Final cart items:', cart.items.map(item => ({
+            _id: item._id,
+            product: item.product,
+            productType: typeof item.product,
+            productId: item.product?._id,
+            size: item.size,
+            quantity: item.quantity
+        })));
+
         res.status(200).json(cart);
     } catch (error) {
+        console.error('Error adding to cart:', error);
         res.status(500).json({ error: 'Error adding to cart', details: error.message });
     }
 });

@@ -9,10 +9,14 @@ const Cart = () => {
     const { user } = useAuth();
     const { cart, loading, error, updateQuantity, removeFromCart, getCartTotal } = useCart();
 
-    const handleQuantityChange = (cartItemId, newQuantity) => {
+    const handleQuantityChange = (id, newQuantity) => {
         if (newQuantity > 0) {
-            updateQuantity(cartItemId, newQuantity);
+            updateQuantity(id, newQuantity);
         }
+    };
+
+    const handleRemoveItem = (id) => {
+        removeFromCart(id);
     };
 
     const handleCheckout = () => {
@@ -60,35 +64,61 @@ const Cart = () => {
                     {/* Cart Items */}
                     <div className="w-full lg:w-2/3">
                         <div className="bg-white rounded-lg shadow-lg">
-                            {cart.items.map((item) => item.product ? (
-                                <div key={item._id} className="flex items-center p-4 border-b border-gray-200">
-                                    <img
-                                        src={item.product.images[0]}
-                                        alt={item.product.name}
-                                        className="w-24 h-24 object-cover rounded-md"
-                                    />
-                                    <div className="ml-4 flex-grow">
-                                        <Link to={`/products/${item.product._id}`} className="font-semibold text-lg text-gray-800 hover:text-primary">{item.product.name}</Link>
-                                        <p className="text-sm text-gray-500">Size: {item.size}</p>
-                                        <p className="text-md font-bold text-primary">₹{item.product.price.toFixed(2)}</p>
+                            {cart.items.map((item) => {
+                                // Get the correct id - use _id from the new structure
+                                const itemId = item._id;
+                                // Get product info safely
+                                const product = item.product || item;
+                                const productName = product.name || item.name;
+                                const productPrice = product.price || item.price || 0;
+                                const productImage = product.images?.[0] || item.image || '/placeholder-image.jpg';
+                                const productId = product._id || item.productId;
+
+                                return (
+                                    <div key={itemId} className="flex items-center p-4 border-b border-gray-200">
+                                        <img
+                                            src={productImage}
+                                            alt={productName}
+                                            className="w-24 h-24 object-cover rounded-md"
+                                            onError={(e) => {
+                                                e.target.src = '/placeholder-image.jpg';
+                                            }}
+                                        />
+                                        <div className="ml-4 flex-grow">
+                                            <Link to={`/products/${productId}`} className="font-semibold text-lg text-gray-800 hover:text-primary">
+                                                {productName}
+                                            </Link>
+                                            <p className="text-sm text-gray-500">Size: {item.size}</p>
+                                            <p className="text-md font-bold text-primary">₹{productPrice.toFixed(2)}</p>
+                                        </div>
+                                        <div className="flex items-center gap-2">
+                                            <button
+                                                onClick={() => handleQuantityChange(itemId, item.quantity - 1)}
+                                                className="p-2 rounded-full bg-gray-200 hover:bg-gray-300 transition-colors"
+                                            >
+                                                <FiMinus size={16} />
+                                            </button>
+                                            <span className="w-10 text-center font-semibold">{item.quantity}</span>
+                                            <button
+                                                onClick={() => handleQuantityChange(itemId, item.quantity + 1)}
+                                                className="p-2 rounded-full bg-gray-200 hover:bg-gray-300 transition-colors"
+                                            >
+                                                <FiPlus size={16} />
+                                            </button>
+                                        </div>
+                                        <div className="ml-6 text-right">
+                                            <p className="font-semibold text-lg text-gray-800">₹{(productPrice * item.quantity).toFixed(2)}</p>
+                                            <button
+                                                onClick={() => handleRemoveItem(itemId)}
+                                                className="mt-1 text-red-500 hover:text-red-700 transition-colors p-1 rounded"
+                                                title="Remove item"
+                                            >
+                                                <FiTrash2 size={18} />
+                                            </button>
+                                        </div>
                                     </div>
-                                    <div className="flex items-center gap-2">
-                                        <button onClick={() => handleQuantityChange(item._id, item.quantity - 1)} className="p-2 rounded-full bg-gray-200 hover:bg-gray-300">
-                                            <FiMinus size={16} />
-                                        </button>
-                                        <span className="w-10 text-center font-semibold">{item.quantity}</span>
-                                        <button onClick={() => handleQuantityChange(item._id, item.quantity + 1)} className="p-2 rounded-full bg-gray-200 hover:bg-gray-300">
-                                            <FiPlus size={16} />
-                                        </button>
-                                    </div>
-                                    <div className="ml-6 text-right">
-                                        <p className="font-semibold text-lg text-gray-800">₹{(item.product.price * item.quantity).toFixed(2)}</p>
-                                        <button onClick={() => removeFromCart(item._id)} className="mt-1 text-red-500 hover:text-red-700">
-                                            <FiTrash2 size={18} />
-                                        </button>
-                                    </div>
-                                </div>
-                            ) : null)}
+                                );
+                            })}
                         </div>
                     </div>
                     {/* Order Summary */}

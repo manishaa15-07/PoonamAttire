@@ -2,6 +2,10 @@ const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const path = require('path');
+
+// Load environment variables first
+dotenv.config();
+
 const connectDB = require('./config/db');
 
 // Load environment variables from the backend directory
@@ -13,7 +17,7 @@ const productRoutes = require('./routes/productRoutes');
 const orderRoutes = require('./routes/orderRoutes');
 const cartRoutes = require('./routes/cartRoutes');
 const adminRoutes = require('./routes/adminRoutes');
-dotenv.config();
+
 const app = express();
 
 // Connect to database

@@ -103,7 +103,7 @@ const Products = () => {
 
     const handleAddToCart = async (productId) => {
         try {
-            await addToCart(productId);
+            await addToCart(productId, 1, 'M'); // Default quantity 1 and size M
         } catch (err) {
             console.error('Error adding to cart:', err);
         }

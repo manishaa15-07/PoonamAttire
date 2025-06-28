@@ -24,7 +24,9 @@ api.interceptors.request.use((config) => {
     const token = localStorage.getItem('token');
     if (token) {
         config.headers.Authorization = `Bearer ${token}`;
-        console.log('🔐 Token attached:', token); // ✅ log it
+        console.log('🔐 Token attached:', token.substring(0, 20) + '...'); // ✅ log it
+        console.log('🔐 Request URL:', config.url);
+        console.log('🔐 Request method:', config.method);
     } else {
         console.warn('⚠️ No token found in localStorage');
     }
@@ -54,15 +56,15 @@ export const productsAPI = {
 export const cartAPI = {
     get: () => api.get('/cart'),
     add: (item) => api.post('/cart', item),
-    updateQuantity: (cartItemId, { quantity }) => api.put(`/cart/${cartItemId}`, { quantity }),
-    remove: (cartItemId) => api.delete(`/cart/${cartItemId}`),
+    updateQuantity: (id, { quantity }) => api.put(`/cart/${id}`, { quantity }),
+    remove: (id) => api.delete(`/cart/${id}`),
     clear: () => api.post('/cart/clear')
 };
 
 // Orders API calls
 export const ordersAPI = {
     create: (data) => api.post('/orders', data),
-    getMyOrders: () => api.get('/orders/'),
+    getMyOrders: () => api.get('/orders/my-orders'),
     getOrder: (id) => api.get(`/orders/${id}`),
     updateStatus: (id, data) => api.patch(`/orders/${id}/status`, data)
 };

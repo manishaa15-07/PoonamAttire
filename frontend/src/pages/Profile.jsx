@@ -18,11 +18,17 @@ const Profile = () => {
         if (user && activeTab === 'orders') {
             const fetchOrders = async () => {
                 try {
+                    console.log('🔄 Fetching orders for user:', user._id);
                     setLoadingOrders(true);
                     const response = await ordersAPI.getMyOrders();
+                    console.log('✅ Orders response:', response);
+                    console.log('📦 Orders data:', response.data);
+                    console.log('📦 First order structure:', response.data[0]);
                     setOrders(response.data);
                     setOrdersError(null);
                 } catch (err) {
+                    console.error('❌ Error fetching orders:', err);
+                    console.error('Error response:', err.response);
                     setOrdersError(err.response?.data?.error || 'Failed to load orders');
                 } finally {
                     setLoadingOrders(false);
@@ -170,12 +176,21 @@ const OrdersContent = ({ orders, loading, error }) => (
                             <tbody className="bg-white divide-y divide-gray-200">
                                 {orders.map(order => (
                                     <tr key={order._id}>
-                                        <td className="px-6 py-4 whitespace-nowrap font-mono text-sm text-gray-500">{order._id.slice(-6).toUpperCase()}</td>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800">{new Date(order.createdAt).toLocaleDateString()}</td>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800">₹{order.totalAmount.toFixed(2)}</td>
+                                        <td className="px-6 py-4 whitespace-nowrap font-mono text-sm text-gray-500">
+                                            {order.orderNumber || order._id.slice(-6).toUpperCase()}
+                                        </td>
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
+                                            {new Date(order.createdAt).toLocaleDateString()}
+                                        </td>
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-800">
+                                            ₹{(order.total || 0).toFixed(2)}
+                                        </td>
                                         <td className="px-6 py-4 whitespace-nowrap">
-                                            <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${order.status === 'DELIVERED' ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'}`}>
-                                                {order.status}
+                                            <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${(order.orderStatus || order.status) === 'delivered' ? 'bg-green-100 text-green-800' :
+                                                (order.orderStatus || order.status) === 'cancelled' ? 'bg-red-100 text-red-800' :
+                                                    'bg-yellow-100 text-yellow-800'
+                                                }`}>
+                                                {(order.orderStatus || order.status || 'pending').toUpperCase()}
                                             </span>
                                         </td>
                                     </tr>
